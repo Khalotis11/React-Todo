@@ -2,7 +2,7 @@ import React from "react";
 
 export const TodoForm = props => {
   return (
-    <form>
+    <form onSubmit={props.handleSubmit}>
       <input
         type="text"
         placeholder="Add todos..."
@@ -11,6 +11,7 @@ export const TodoForm = props => {
         onChange={props.handleChange}
       />
       <button type="submit">Add Todo</button>
+      <button>Clear Completed</button>
     </form>
   );
 };
