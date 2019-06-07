@@ -42,13 +42,27 @@ class App extends React.Component {
       textInput: ""
     });
   };
+  toggleHandler = id => {
+    this.setState({
+      toDoList: this.state.toDoList.map(item => {
+        if (id === item.id) {
+          return {
+            todo: item.todo,
+            id: item.id,
+            complete: !item.complete
+          };
+        }
+        return item;
+      })
+    });
+  };
   render() {
     return (
       <div>
         <h2>Todo List :</h2>
         <div>
           {this.state.toDoList.map(item => (
-            <TodoList item={item} />
+            <TodoList item={item} toggleHandler={this.toggleHandler} />
           ))}
         </div>
         <div>
