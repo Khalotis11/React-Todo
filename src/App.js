@@ -32,14 +32,18 @@ class App extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    let id = Date.now();
-
-    this.setState({
-      toDoList: [
-        ...this.state.toDoList,
-        { todo: this.state.textInput, id, complete: false }
-      ],
-      textInput: ""
+    this.setState(prevState => {
+      return {
+        toDoList: [
+          ...prevState.toDoList,
+          {
+            todo: prevState.textInput,
+            id: Date.now(),
+            completed: false
+          }
+        ],
+        textInput: ""
+      };
     });
   };
   toggleHandler = id => {
@@ -47,8 +51,7 @@ class App extends React.Component {
       toDoList: this.state.toDoList.map(item => {
         if (id === item.id) {
           return {
-            todo: item.todo,
-            id: item.id,
+            ...item,
             complete: !item.complete
           };
         }
@@ -56,6 +59,14 @@ class App extends React.Component {
       })
     });
   };
+  clearHandler = e => {
+    e.preventDefault();
+    console.log("Clear clicked");
+    this.setState({
+      toDoList: this.state.toDoList.filter(item => !item.complete)
+    });
+  };
+
   render() {
     return (
       <div>
@@ -70,6 +81,7 @@ class App extends React.Component {
             textInput={this.state.textInput}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
+            clearHandler={this.clearHandler}
           />
         </div>
       </div>

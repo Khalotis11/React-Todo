@@ -11,7 +11,7 @@ export const TodoForm = props => {
         onChange={props.handleChange}
       />
       <button type="submit">Add Todo</button>
-      <button>Clear Completed</button>
+      <button onClick={props.clearHandler}>Clear Completed</button>
     </form>
   );
 };
